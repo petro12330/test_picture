@@ -59,7 +59,7 @@ class ImagesView(DetailView):
         path = '\\'.join(path)
         if int(width) == int(img.width) and int(height) == int(img.height):
             try:
-                os.remove('media/images/resize/' + path)
+                os.remove(path)
                 self.object.image_url = None
             except FileNotFoundError:
                 error = 'Введите ширину и высоту'
