@@ -63,7 +63,8 @@ class ImagesView(DetailView):
         else:
             img = img.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
 
-            img.save('media/images/resize/' + path)
+            img.save('picture/media/images/resize/' + path)
+
             self.object.image_url = '/media/images/resize/' + path
         self.object.save()
         data = {
