@@ -53,7 +53,10 @@ class ImagesView(DetailView):
             height = int(img.height)
             width = int(img.width)
             error = 'Оригинальный размер {}*{}'.format(width, height)
-        path = path.split('\\')[-1]
+        path = path.split('\\')
+        file_name = path[-1]
+        path.insert(-1, 'resize')
+        path = '\\'.join(path)
         if int(width) == int(img.width) and int(height) == int(img.height):
             try:
                 os.remove('media/images/resize/' + path)
@@ -62,10 +65,8 @@ class ImagesView(DetailView):
                 error = 'Введите ширину и высоту'
         else:
             img = img.resize((int(width), int(height)), PIL.Image.ANTIALIAS)
-
-            img.save('picture/media/images/resize/' + path)
-
-            self.object.image_url = '/media/images/resize/' + path
+            img.save(path)
+            self.object.image_url = '/media/images/resize/' + file_name
         self.object.save()
         data = {
             'image': context['image'],
