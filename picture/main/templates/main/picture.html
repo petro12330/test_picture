@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{image.id}}</title>
+</head>
+<body>
+     <a href="{% url 'home' %}">Назад к списку </a><br>
+     <form method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+         <p>{{ error }} <p>
+         <p>{{ form.width }} ширина<p>
+         <p>{{ form.height }} высота<p>
+        <button type="submit">Выбрать</button>
+     </form>
+     <img src="{{ img }}"><br>
+     {% if image.image_url %}
+        <img src="{{ image.image_url }}"><br>
+     {% else %}
+          <img src="{{ image.image.url }}"><br>
+     {% endif %}
+</body>
+</html>
